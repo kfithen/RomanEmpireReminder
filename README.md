@@ -1,8 +1,10 @@
-# RomanEmpireReminder
+# RomanEmpireReminder (Linux fork)
+> [!WARNING]
+> This is a fork of the original project that intends to reach compatibility with Linux through the use of `org.freedesktop.notification`
 
 ## Description
 
-A simple Python script to remind the user of the Roman Empire at random intervals, all via Windows toast notifications (sorry Linux users). The intervals range anywhere from every 5 minutes up to an hour. 
+A simple Python script to remind the user of the Roman Empire at random intervals, via desktop notifications (notably, this fork aims to support Windows and most Linux platforms). The intervals range anywhere from every 5 minutes up to an hour. 
 
 > [!WARNING]
 > I do not own any of the materials that are referenced or shared in this project. These images, sound effects, and other materials belong to their respective copyright holders. Please, do not sue me over some silly Python app!
@@ -23,13 +25,8 @@ If for some reason that doesn't work, here is the list of requirements that the 
 
 ```
 datetime
-json
-os
-platform
 pygame
 pyttsx3
-random
-time
 windows_toasts
 ```
 

@@ -66,12 +66,13 @@ class RomanEmpireReminder:
         os.system("title Roman Empire Reminder")
 
     def PrintHeader(self) -> None:
-        print("""   
+        print(r"""   
            ___                         ____           _           ___            _         __       
           / _ \___  __ _  ___ ____    / __/_ _  ___  (_)______   / _ \___ __ _  (_)__  ___/ /__ ____
          / , _/ _ \/  ' \/ _ `/ _ \  / _//  ' \/ _ \/ / __/ -_) / , _/ -_)  ' \/ / _ \/ _  / -_) __/
         /_/|_|\___/_/_/_/\_,_/_//_/ /___/_/_/_/ .__/_/_/  \__/ /_/|_|\__/_/_/_/_/_//_/\_,_/\__/_/   
-                                             /_/                                              \n""")
+                                             /_/                                                    
+        """)
         print("Version: ?\nLast Updated: 7/3/2024\nCreator & Maintainer: Kendrick Fithen\n")
 
     def CheckOperatingSystem(self) -> None:

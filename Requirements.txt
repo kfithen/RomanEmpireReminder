@@ -1,0 +1,9 @@
+datetime
+json
+os
+platform
+pygame
+pyttsx3
+random
+time
+windows_toasts

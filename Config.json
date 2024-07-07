@@ -1,0 +1,40 @@
+{
+    "NotificationArray": {
+        {
+            "Image": "Image/Buddy_Christ.jpg", 
+            "Heading": "Buddy Christ",
+            "Body": "I just got hung on a cross for being too popular, only to become even more popular!", 
+            "Audio": "Audio/Got_Em.mp3"
+        },
+        {
+            "Image": "Image/Julius_Caesar_Getting_Stabbed.jpg", 
+            "Heading": "Julius Caesar", 
+            "Body": "Beware the Ides of March? Nah bruh, blud is yappin fr fr.",
+            "Audio": "Audio/What_Is_Blud_Yapping_About.mp3"
+        },
+        {
+            "Image": "Image/Marcus_Aurelius.jpg", 
+            "Heading": "Marcus Aurelius", 
+            "Body": "IHATEMYLIFEIHATEMYLIFEIHATEMYLIFEIHATEMYLIFEIHATEMYLIFE",
+            "Audio": "Audio/Man_Screaming.mp3"
+        },
+        {
+            "Image": "Image/Ok_Sure_Bill_Wurtz.png", 
+            "Heading": "Bill Wurtz", 
+            "Body": '"Is loving Jesus legal yet? Uh, no. Wait, actually, sure." - Constantine',
+            "Audio": "Audio/Is_Loving_Jesus_Legal_Yet.mp3"
+        },
+        {
+            "Image": "Image/They_Split.png",
+            "Heading": "The Roman Empire",
+            "Body": "Our nation is the greatest nation! It will never spl-",
+            "Audio": "Audio/Oops.mp3"
+        },
+        {
+            "Image": "Image/Stoicism.png", 
+            "Heading": "Stoicism", 
+            "Body": '"Life is hard, L, deal with it."',
+            "Audio": "Audio/Baby_Crying.mp3"
+        }
+    }
+}

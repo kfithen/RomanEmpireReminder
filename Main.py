@@ -38,7 +38,7 @@ class RomanEmpireReminder:
          / , _/ _ \/  ' \/ _ `/ _ \  / _//  ' \/ _ \/ / __/ -_) / , _/ -_)  ' \/ / _ \/ _  / -_) __/
         /_/|_|\___/_/_/_/\_,_/_//_/ /___/_/_/_/ .__/_/_/  \__/ /_/|_|\__/_/_/_/_/_//_/\_,_/\__/_/   
                                              /_/                                              \n""")
-        print("Version: ?\nLast Updated: 7/3/2024\nCreator & Maintainer: Kendrick Fithen\n")
+        print("Version: ?\nLast Updated: 7/7/2024\nCreator & Maintainer: Kendrick Fithen\n")
 
     def CheckOperatingSystem(self) -> None:
         if (platform.system() != "Windows" or platform.release() not in ["10", "11"]):

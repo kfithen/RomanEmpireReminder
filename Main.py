@@ -7,63 +7,38 @@
 # Version: ?
 # Last Updated: 7/3/2024
 # Creator & Maintainer: Kendrick Fithen
+# Linux Compatibility Maintainer: John Reed
 
-import datetime
 import json
 import os
-import platform
-from pygame import mixer
-import pyttsx3
 import random
 import time
-from windows_toasts import Toast, ToastDisplayImage, WindowsToaster
+
+import datetime
+from pygame import mixer # I'd like to look into a different audio player here, pygame *cannot* be optimal - John Reed
+import platform
+import pyttsx3
+
+from notification import Notification, GetNotifier
 
 class RomanEmpireReminder:
     def __init__(self) -> None:
         self.NotificationIndex = 0
+        self.NotificationArray = []
 
-        self.NotificationArray = [
-            {
-                "Image": "Image/Buddy_Christ.jpg", 
-                "Heading": "Buddy Christ",
-                "Body": "I just got hung on a cross for being too popular, only to become even more popular!", 
-                "Audio": "Audio/Got_Em.mp3"
-            },
-            {
-                "Image": "Image/Julius_Caesar_Getting_Stabbed.jpg", 
-                "Heading": "Julius Caesar", 
-                "Body": "Beware the Ides of March? Nah bruh, blud is yappin fr fr.",
-                "Audio": "Audio/What_Is_Blud_Yapping_About.mp3"
-            },
-            {
-                "Image": "Image/Marcus_Aurelius.jpg", 
-                "Heading": "Marcus Aurelius", 
-                "Body": "IHATEMYLIFEIHATEMYLIFEIHATEMYLIFEIHATEMYLIFEIHATEMYLIFE",
-                "Audio": "Audio/Man_Screaming.mp3"
-            },
-            {
-                "Image": "Image/Ok_Sure_Bill_Wurtz.png", 
-                "Heading": "Bill Wurtz", 
-                "Body": '"Is loving Jesus legal yet? Uh, no. Wait, actually, sure." - Constantine',
-                "Audio": "Audio/Is_Loving_Jesus_Legal_Yet.mp3"
-            },
-            {
-                "Image": "Image/They_Split.png",
-                "Heading": "The Roman Empire",
-                "Body": "Our nation is the greatest nation! It will never spl-",
-                "Audio": "Audio/Oops.mp3"
-            },
-            {
-                "Image": "Image/Stoicism.png", 
-                "Heading": "Stoicism", 
-                "Body": '"Life is hard, L, deal with it."',
-                "Audio": "Audio/Baby_Crying.mp3"
-            }
-        ]
+        with open('Config.json', 'r') as NotificationConfig:
+            ConfigData = json.load(NotificationConfig)
+            self.NotificationArray = ConfigData.get("NotificationArray", [])
 
     def SetConsole(self) -> None:
-        os.system("cls")
-        os.system("title Roman Empire Reminder")
+        title = "Roman Empire Reminder"
+
+        if platform.system() == "Windows": 
+            os.system("cls")
+            os.system("title Roman Empire Reminder")
+        else: # Linux
+            os.system("clear")
+            print(f'\33]0;{title}\a', end='', flush=True)
 
     def PrintHeader(self) -> None:
         print(r"""   
@@ -73,15 +48,15 @@ class RomanEmpireReminder:
         /_/|_|\___/_/_/_/\_,_/_//_/ /___/_/_/_/ .__/_/_/  \__/ /_/|_|\__/_/_/_/_/_//_/\_,_/\__/_/   
                                              /_/                                                    
         """)
-        print("Version: ?\nLast Updated: 7/3/2024\nCreator & Maintainer: Kendrick Fithen\n")
+        print("Version: ?\nLast Updated: 7/3/2024\nCreator & Maintainer: Kendrick Fithen\nLinux Compatibility Maintainer: John Reed\n")
 
     def CheckOperatingSystem(self) -> None:
-        if (platform.system() != "Windows" or platform.release() not in ["10", "11"]):
-            print("You can't run this program on anything other than Windows 10 or 11. Sorry!")
-            time.sleep(1)
+        if (platform.system() != "Windows" or platform.release() not in ["10", "11"]) and (platform.system() != "Linux"):
+            print("You can't run this program on anything other than Linux (with dbus) or Windows 10/11. Sorry!")
+            time.sleep(1) # Why sleep? - John Reed
             exit()
         
-    def RandomizeIndex(self) -> None:
+    def RandomizeIndex(self) -> None: # Randomizes but still go through the normal order? Understandable but weird, lol - John Reed
         self.NotificationIndex = random.randint(0, len(self.NotificationArray) - 1)
 
     def PrintReminder(self) -> None:
@@ -104,15 +79,13 @@ class RomanEmpireReminder:
     def RemindOfRomanEmpire(self) -> None:
         self.RandomizeIndex()
         self.PrintReminder()
-        Toaster = WindowsToaster("Python")
-        ToastNotification = Toast()
-        ToastNotification.AddImage(ToastDisplayImage.fromPath(self.NotificationArray[self.NotificationIndex]["Image"]))
-        ToastNotification.text_fields = [
-            self.NotificationArray[self.NotificationIndex]["Heading"],
-            self.NotificationArray[self.NotificationIndex]["Body"]
-        ]
+        notifier = GetNotifier(appName="Python")
+        notification = Notification()
+        notification.Icon = self.NotificationArray[self.NotificationIndex]["Image"]
+        notification.Summary = self.NotificationArray[self.NotificationIndex]["Heading"]
+        notification.Body = self.NotificationArray[self.NotificationIndex]["Body"]
         self.PlayNotificationAudio()
-        Toaster.show_toast(ToastNotification)
+        notifier.Show(notification)
         self.SayToastNotification()
 
 if __name__ == "__main__":

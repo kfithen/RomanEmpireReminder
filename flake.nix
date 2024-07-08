@@ -7,7 +7,13 @@
     pkgs = forAllSystems (system: nixpkgs.legacyPackages.${system});
   in {
     devShells = forAllSystems (system: {
-      default =  pkgs.${system}.mkShell {
+      default = pkgs.${system}.mkShell {
+        LD_LIBRARY_PATH = with pkgs.${system}; lib.makeLibraryPath [
+          stdenv.cc.cc
+          espeak-classic
+        ];
+
+#        NIX_LD = builtins.readFile "${pkgs.${system}.stdenv.cc}/nix-support/dynamic-linker";
 
         packages = with pkgs.${system}.python312Packages; [
           python
@@ -16,6 +22,7 @@
           datetime
           pygame
           pyttsx3
+          dbus-python
         ];
       };
     });

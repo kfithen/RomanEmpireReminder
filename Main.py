@@ -5,18 +5,21 @@
 #                                      /_/                                                     
 #
 # Version: ?
-# Last Updated: 7/7/2024
+# Last Updated: 7/3/2024
 # Creator & Maintainer: Kendrick Fithen
+# Linux Compatibility Maintainer: John Reed
 
-import datetime
 import json
 import os
-import platform
-from pygame import mixer
-import pyttsx3
 import random
 import time
-from windows_toasts import Toast, ToastDisplayImage, WindowsToaster
+
+import datetime
+from pygame import mixer # I'd like to look into a different audio player here, pygame *cannot* be optimal - John Reed
+import platform
+import pyttsx3
+
+from notification import Notification, GetNotifier
 
 class RomanEmpireReminder:
     def __init__(self) -> None:
@@ -28,22 +31,28 @@ class RomanEmpireReminder:
             self.NotificationArray = ConfigData.get("NotificationArray", [])
 
     def SetConsole(self) -> None:
-        os.system("cls")
-        os.system("title Roman Empire Reminder")
+        title = "Roman Empire Reminder"
+
+        if platform.system() == "Windows": 
+            os.system("cls")
+            os.system("title Roman Empire Reminder")
+        else: # Linux
+            os.system("clear")
+            print(f'\33]0;{title}\a', end='', flush=True)
 
     def PrintHeader(self) -> None:
-        print("""   
+        print(r"""   
            ___                         ____           _           ___            _         __       
           / _ \___  __ _  ___ ____    / __/_ _  ___  (_)______   / _ \___ __ _  (_)__  ___/ /__ ____
          / , _/ _ \/  ' \/ _ `/ _ \  / _//  ' \/ _ \/ / __/ -_) / , _/ -_)  ' \/ / _ \/ _  / -_) __/
         /_/|_|\___/_/_/_/\_,_/_//_/ /___/_/_/_/ .__/_/_/  \__/ /_/|_|\__/_/_/_/_/_//_/\_,_/\__/_/   
-                                             /_/                                              \n""")
-        print("Version: ?\nLast Updated: 7/7/2024\nCreator & Maintainer: Kendrick Fithen\n")
+                                             /_/                                                    
+        """)
+        print("Version: ?\nLast Updated: 7/3/2024\nCreator & Maintainer: Kendrick Fithen\nLinux Compatibility Maintainer: John Reed\n")
 
     def CheckOperatingSystem(self) -> None:
-        if (platform.system() != "Windows" or platform.release() not in ["10", "11"]):
-            print("You can't run this program on anything other than Windows 10 or 11. Sorry!")
-            time.sleep(1)
+        if (platform.system() != "Windows" or platform.release() not in ["10", "11"]) and (platform.system() != "Linux"):
+            print("You can't run this program on anything other than Linux (with dbus) or Windows 10/11. Sorry!")
             exit()
         
     def RandomizeIndex(self) -> None:
@@ -69,15 +78,13 @@ class RomanEmpireReminder:
     def RemindOfRomanEmpire(self) -> None:
         self.RandomizeIndex()
         self.PrintReminder()
-        Toaster = WindowsToaster("Python")
-        ToastNotification = Toast()
-        ToastNotification.AddImage(ToastDisplayImage.fromPath(self.NotificationArray[self.NotificationIndex]["Image"]))
-        ToastNotification.text_fields = [
-            self.NotificationArray[self.NotificationIndex]["Heading"],
-            self.NotificationArray[self.NotificationIndex]["Body"]
-        ]
+        notifier = GetNotifier(appName="Python")
+        notification = Notification()
+        notification.Icon = self.NotificationArray[self.NotificationIndex]["Image"]
+        notification.Summary = self.NotificationArray[self.NotificationIndex]["Heading"]
+        notification.Body = self.NotificationArray[self.NotificationIndex]["Body"]
         self.PlayNotificationAudio()
-        Toaster.show_toast(ToastNotification)
+        notifier.Show(notification)
         self.SayToastNotification()
 
 if __name__ == "__main__":

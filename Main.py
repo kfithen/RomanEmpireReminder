@@ -5,21 +5,19 @@
 #                                      /_/                                                     
 #
 # Version: ?
-# Last Updated: 7/3/2024
+# Last Updated: 7/8/2024
 # Creator & Maintainer: Kendrick Fithen
-# Linux Compatibility Maintainer: John Reed
-
-import json
-import os
-import random
-import time
+# Contributor(s): John Reed
 
 import datetime
-from pygame import mixer # I'd like to look into a different audio player here, pygame *cannot* be optimal - John Reed
+import json
+from notification import Notification, GetNotifier
+import os
+from pygame import mixer
 import platform
 import pyttsx3
-
-from notification import Notification, GetNotifier
+import random
+import time
 
 class RomanEmpireReminder:
     def __init__(self) -> None:
@@ -36,7 +34,7 @@ class RomanEmpireReminder:
         if platform.system() == "Windows": 
             os.system("cls")
             os.system("title Roman Empire Reminder")
-        else: # Linux
+        else:
             os.system("clear")
             print(f'\33]0;{title}\a', end='', flush=True)
 
@@ -48,11 +46,12 @@ class RomanEmpireReminder:
         /_/|_|\___/_/_/_/\_,_/_//_/ /___/_/_/_/ .__/_/_/  \__/ /_/|_|\__/_/_/_/_/_//_/\_,_/\__/_/   
                                              /_/                                                    
         """)
-        print("Version: ?\nLast Updated: 7/3/2024\nCreator & Maintainer: Kendrick Fithen\nLinux Compatibility Maintainer: John Reed\n")
+        print("Version: ?\nLast Updated: 7/8/2024\nCreator & Maintainer: Kendrick Fithen\nContributor(s): John Reed\n")
 
     def CheckOperatingSystem(self) -> None:
         if (platform.system() != "Windows" or platform.release() not in ["10", "11"]) and (platform.system() != "Linux"):
             print("You can't run this program on anything other than Linux (with dbus) or Windows 10/11. Sorry!")
+            time.sleep(1)
             exit()
         
     def RandomizeIndex(self) -> None:
@@ -95,10 +94,9 @@ if __name__ == "__main__":
     
     while True:
         try:
-            Program.RemindOfRomanEmpire()
-            # Interval = random.randint(300, 3600)
-            Interval = 30
+            Interval = random.randint(300, 3600)
             time.sleep(Interval)
+            Program.RemindOfRomanEmpire()
         except KeyboardInterrupt:
             print("\nKeyboardInterrupt: Exiting...\n")
             time.sleep(1)

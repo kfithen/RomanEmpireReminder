@@ -53,10 +53,9 @@ class RomanEmpireReminder:
     def CheckOperatingSystem(self) -> None:
         if (platform.system() != "Windows" or platform.release() not in ["10", "11"]) and (platform.system() != "Linux"):
             print("You can't run this program on anything other than Linux (with dbus) or Windows 10/11. Sorry!")
-            time.sleep(1) # Why sleep? - John Reed
             exit()
         
-    def RandomizeIndex(self) -> None: # Randomizes but still go through the normal order? Understandable but weird, lol - John Reed
+    def RandomizeIndex(self) -> None:
         self.NotificationIndex = random.randint(0, len(self.NotificationArray) - 1)
 
     def PrintReminder(self) -> None:

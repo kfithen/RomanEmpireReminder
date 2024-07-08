@@ -1,4 +1,4 @@
-# RomanEmpireReminder (Linux fork)
+# RomanEmpireReminder (Linux-Compatible fork)
 > [!WARNING]
 > This is a fork of the original project that intends to reach compatibility with Linux through the use of `org.freedesktop.notification`
 
@@ -19,7 +19,7 @@ This was originally written in C#, but I had such a hard time getting Microsoft'
 
 ## Requirements
 
-To install the requirements, just change your directory to the repository and type the command ```pip install -r Requirements.txt```.
+To install the requirements, just change your directory to the repository and type the command ```pip install -r Requirements.txt``` or use ```nix develop``` (perhaps one day I'll implement ```nix run```).
 
 If for some reason that doesn't work, here is the list of requirements that the script uses:
 
@@ -27,7 +27,6 @@ If for some reason that doesn't work, here is the list of requirements that the 
 datetime
 pygame
 pyttsx3
-windows_toasts
+windows_toasts (windows)
+dbus-python (linux)
 ```
-
-You can also find the names of the required packages by simply looking at the imports at the top of the Python script.

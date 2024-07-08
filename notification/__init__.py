@@ -65,8 +65,10 @@ if platform.system() == "Windows" and platform.release() in ["10", "11"]:
             # create windows_toasts toast from notification
             toastNotif = Toast()
             toastNotif.AddImage(ToastDisplayImage.fromPath(notification.Icon))
-            toastNotif.text_fields[0] = notification.Summary
-            toastNotif.text_fields[1] = notification.Body
+            toastNotif.text_fields = [
+                notification.Summary,
+                notification.Body
+            ]
 
             # display toast
             self._toaster.show_toast(toastNotif)

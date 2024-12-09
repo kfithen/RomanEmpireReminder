@@ -11,20 +11,25 @@
 
 import datetime
 import json
-from notification import Notification, GetNotifier
 import os
+from pathlib import Path
 from pygame import mixer
 import platform
 import pyttsx3
 import random
 import time
 
+from .notification import Notification, GetNotifier
+
 class RomanEmpireReminder:
-    def __init__(self) -> None:
+    def __init__(self, path: Path) -> None:
+        # get the root for our data files (Audio, Config.json, Image, etc.)
+        self.path = path
+
         self.NotificationIndex = 0
         self.NotificationArray = []
 
-        with open('Config.json', 'r') as NotificationConfig:
+        with open(self.path / 'Config.json', 'r') as NotificationConfig:
             ConfigData = json.load(NotificationConfig)
             self.NotificationArray = ConfigData.get("NotificationArray", [])
 
@@ -64,11 +69,12 @@ class RomanEmpireReminder:
 
     def PlayNotificationAudio(self) -> None:
         mixer.init()
-        mixer.music.load(self.NotificationArray[self.NotificationIndex]["Audio"])
+        mixer.music.load(self.path / self.NotificationArray[self.NotificationIndex]["Audio"])
         mixer.music.play()
+        mixer.music.get_pos
 
     def SayToastNotification(self) -> None:
-        NotificationAudioLength = mixer.Sound(self.NotificationArray[self.NotificationIndex]["Audio"]).get_length()
+        NotificationAudioLength = mixer.Sound(self.path / self.NotificationArray[self.NotificationIndex]["Audio"]).get_length()
         time.sleep(NotificationAudioLength)
         TextToSpeech = pyttsx3.init()
         TextToSpeech.say(self.NotificationArray[self.NotificationIndex]["Body"])
@@ -79,7 +85,7 @@ class RomanEmpireReminder:
         self.PrintReminder()
         notifier = GetNotifier(appName="Python")
         notification = Notification()
-        notification.Icon = self.NotificationArray[self.NotificationIndex]["Image"]
+        notification.Icon = self.path / self.NotificationArray[self.NotificationIndex]["Image"]
         notification.Summary = self.NotificationArray[self.NotificationIndex]["Heading"]
         notification.Body = self.NotificationArray[self.NotificationIndex]["Body"]
         self.PlayNotificationAudio()

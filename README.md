@@ -15,29 +15,31 @@ I made this project after remembering an old meme circling the internet in late 
 
 This was originally written in C#, but I had such a hard time getting Microsoft's own libraries to work with Visual Studio that I decided to rewrite it in Python. Somehow, Python was much easier than using Microsoft's own tools (makes sense, right?), but I liked using C# so much that I wrote the Python script similarly to how I wrote the original script. So there you go, deal with it.
 
-## Requirements
+## Installation
 
-To install the requirements, just change your directory to the repository by using the ```cd``` command, then type the command ```pip install -r Requirements.txt``` afterward (or, if using Linux, ```pip install -r Linux_Requirements.txt```).
+Roman Empire Reminder is indexed in PyPi and can be installed with, for example, ```pip install roman-empire-reminder```.
+
+Alternatively, you can run ```pip install path/to/clone``` to install from a local clone.
 
 If for some reason that doesn't work, here is the list of requirements that the script uses:
 
-```
+```requirements.txt
 datetime
 pygame
 pyttsx3
+
 windows_toasts # Windows
 dbus-python # Linux
 ```
 
-The rest of the libraries required should be built into Python, but if not, please check the imports at the top of the Main.py file.
+The rest of the libraries required should be built into Python, but if not, please check the imports in the `__init__.py`, `__main__.py`, and `notification.py` files in `roman-empire-reminder`.
 
 ## How to Run
 
-Change your directory to the repository by using the ```cd``` command, then run the command ```python Main.py```. That's it, now prepare to be reminded of the glorius Roman Empire!
+Run ```py -m roman-empire-reminder``` (Windows) or ```python -m roman-empire-reminder``` (Linux) in Command Prompt / a terminal emulator after installation.
+
+Alternatively, run from the directory by executing `roman-empire-reminder/__main__.py` with python.
 
 ## Contributing
 
 Contributions are welcome as long as you don't try to make any drastic changes. As long as you do that, then I would be happy to look at any pull request and see if I approve!
-
-# tmp notes
-```pip install -i https://test.pypi.org/simple/ pip install --extra-index-url https://pypi.org/simple/ roman-empire-reminder```

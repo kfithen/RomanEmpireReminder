@@ -2,14 +2,9 @@
 requires = ["setuptools>=64", "setuptools_scm>=8"]
 build-backend = "setuptools.build_meta"
 
-[tool.setuptools.packages.find]
-# All the following settings are optional:
-#exclude = ["notification"] # empty by default
-#include = ["src"]
-
 [project]
 name = "roman-empire-reminder"
-version = "1.2.0"
+version = "1.2.1"
 authors = [
   {name = "Kendrick Fithen"},
   {name = "John Reed", email = "ReallyJohnReed@Gmail.com"},
@@ -51,9 +46,6 @@ dependencies = [
     "windows_toasts; platform_system == 'Windows'",
     "dbus-python; platform_system == 'Linux'",
 ]
-
-[project.scripts]
-#rer = "jr-roman-empire-reminder-test-module.__main__"
 
 [project.urls]
 Repository = "https://github.com/kfithen/RomanEmpireReminder"

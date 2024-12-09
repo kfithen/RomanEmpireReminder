@@ -12,7 +12,7 @@ with importlib.resources.as_file(importlib.resources.files("roman-empire-reminde
 
     while True:
         try:
-            Interval = 3#random.randint(300, 3600)
+            Interval = random.randint(300, 3600)
             time.sleep(Interval)
             Program.RemindOfRomanEmpire()
         except KeyboardInterrupt:

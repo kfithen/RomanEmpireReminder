@@ -38,3 +38,6 @@ Change your directory to the repository by using the ```cd``` command, then run 
 ## Contributing
 
 Contributions are welcome as long as you don't try to make any drastic changes. As long as you do that, then I would be happy to look at any pull request and see if I approve!
+
+# tmp notes
+```pip install -i https://test.pypi.org/simple/ pip install --extra-index-url https://pypi.org/simple/ roman-empire-reminder```

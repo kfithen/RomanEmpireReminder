@@ -7,7 +7,7 @@ build-backend = "setuptools.build_meta"
 exclude = ["./notification"] # empty by default
 
 [project]
-name = "RomanEmpireReminder"
+name = "roman-empire-reminder"
 version = "1.1.0"
 authors = [
   {name = "Kendrick Fithen"},

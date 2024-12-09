@@ -17,7 +17,7 @@ This was originally written in C#, but I had such a hard time getting Microsoft'
 
 ## Requirements
 
-To install the requirements, just change your directory to the repository by using the ```cd``` command, then type the command ```pip install -r Requirements.txt``` afterward.
+To install the requirements, just change your directory to the repository by using the ```cd``` command, then type the command ```pip install -r Requirements.txt``` afterward (or, if using Linux, ```pip install -r Linux_Requirements.txt```).
 
 If for some reason that doesn't work, here is the list of requirements that the script uses:
 

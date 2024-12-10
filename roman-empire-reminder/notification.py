@@ -3,25 +3,26 @@
 
 from abc import ABC, abstractmethod
 import platform
+from pathlib import Path
 
 class Notification:
     """Notification represents a desktop notification
-        Icon: str - A path to the image to use for the notification icon
-        Summary: str - A short summary of the notification's contents (header)
-        Body: str - The notification's full contents
+        Icon: `Path` - A path to the image to use for the notification icon
+        Summary: `Path` - A short summary of the notification's contents (header)
+        Body: `Path` - The notification's full contents
     """
 
     def __init__(self) -> None:
         # Now, it may be the case that empty strings can mess things up, so I might have to fix that
-        self._icon = ""
+        self._icon = Path("")
         self._summary = ""
         self._body = ""
 
     @property
-    def Icon(self) -> str:
+    def Icon(self) -> Path:
         return self._icon
     @Icon.setter
-    def Icon(self, iconPath: str) -> None:
+    def Icon(self, iconPath: Path) -> None:
         self._icon = iconPath
 
     @property
@@ -90,7 +91,7 @@ elif platform.system() == "Linux":
             self._notifyIntf.Notify(
                 self._appName,
                 0, # replaces_id (which notification to replace, 0 means none)
-                notification.Icon,
+                str(notification.Icon),
                 notification.Summary,
                 notification.Body,
                 [], # list of actions (interactivity)

@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=64", "setuptools_scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "roman-empire-reminder"
+version = "1.2.1"
+authors = [
+  {name = "Kendrick Fithen"},
+  {name = "John Reed", email = "ReallyJohnReed@Gmail.com"},
+]
+maintainers = [
+  {name = "Kendrick Fithen"},
+]
+description = "A simple Python script to remind the user of the Roman Empire at random intervals, all via toast notifications."
+keywords = ["Roman", "Roman Empire"]
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+
+  "Topic :: Games/Entertainment",
+
+  "Intended Audience :: End Users/Desktop",
+
+  "Environment :: Console",
+
+  "License :: OSI Approved :: MIT License",
+
+  "Natural Language :: English",
+
+  "Operating System :: Microsoft :: Windows :: Windows 10",
+  "Operating System :: Microsoft :: Windows :: Windows 11",
+  "Operating System :: POSIX :: Linux",
+
+  "Programming Language :: Python :: 3",
+  #"Programming Language :: Python :: 3.6",
+  #"Programming Language :: Python :: 3.7",
+  #"Programming Language :: Python :: 3.8",
+  #"Programming Language :: Python :: 3.9",
+]
+readme = "README.md"
+requires-python = ">=3"
+dependencies = [
+    "datetime",
+    "pygame",
+    "pyttsx3",
+    "windows_toasts; platform_system == 'Windows'",
+    "dbus-python; platform_system == 'Linux'",
+]
+
+[project.urls]
+Repository = "https://github.com/kfithen/RomanEmpireReminder"
+Issues = "https://github.com/me/kfithen/RomanEmpireReminder/issues"

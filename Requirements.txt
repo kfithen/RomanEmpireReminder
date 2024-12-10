@@ -1,5 +1,0 @@
-datetime
-pygame
-pyttsx3
-windows_toasts # Windows
-dbus-python # Linux

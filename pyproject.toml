@@ -49,4 +49,4 @@ dependencies = [
 
 [project.urls]
 Repository = "https://github.com/kfithen/RomanEmpireReminder"
-Issues = "https://github.com/me/kfithen/RomanEmpireReminder/issues"
+Issues = "https://github.com/kfithen/RomanEmpireReminder/issues"
